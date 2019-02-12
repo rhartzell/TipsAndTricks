@@ -1,4 +1,4 @@
-# ============  ElasticSearch API ==============
+# ElasticSearch API & Swagger
 
 ## install
 ```
@@ -49,7 +49,7 @@ curl -X GET "localhost:9200/_cat/indices?v"
 brew install jq
 ```
 
-# ============  Todo List API in Swagger ==============
+# Todo List API in Swagger 
 
 ## List all Todos
 ```
