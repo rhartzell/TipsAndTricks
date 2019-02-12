@@ -3,12 +3,12 @@
 Some very handy powershell scripts to get the job done
 A collection of scripts and commands to troubleshoot issues very quickly.
 
-##Grep Logs 
+## Grep Logs 
 Unix/Linux has the very handy GREP function and the piping ability allows you to crunch through thousands of logs very very quickly.  As it turns out PowerShell has the very same power.  Some might even argue MORE power.
 
 the Select-String command can be abbreviated as sls
 
-##Find a string in a file or files
+## Find a string in a file or files
 select-string "unable to to get chat status" -Path web.qa-*.log
 Use regular expressions to find in a file or files.
 The following code will find email addresses in a file.
@@ -16,12 +16,12 @@ The following code will find email addresses in a file.
 select-string -path *.txt20151201 -pattern "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b”
 ```
 
-##Show lines of context for a string found in a file or files
+## Show lines of context for a string found in a file or files
 ```
 select-string "unable to to get chat status" -Path web.qa-20190211.log -Context 5
 ```
 
-##Count occurrences of text in a file or files.
+## Count occurrences of text in a file or files.
 ```
 PS C:\logs> select-string "unable to to get chat status" -Path web.qa-*.log | measure-object -line
  
@@ -30,7 +30,7 @@ Lines Words Characters Property
   260
 ```
 
-##Deployment and Web Administration
+## Deployment and Web Administration
 List websites 
 The script below lists the physical path of each web application in IIS. There are many other properties that can also be listed.
 ```
@@ -45,7 +45,7 @@ foreach ($item in Get-Childitem $iispath | where {$_.Schema.Name -eq 'Applicatio
 }
 ```
 
-##Other useful tidbits
+## Other useful tidbits
 Set a timer in a script
 ```$ElapsedTime = [System.Diagnostics.Stopwatch]::StartNew()
   
@@ -59,7 +59,7 @@ write-host "Script Ended at $(get-date)"
 write-host "Total Elapsed Time: $($ElapsedTime.Elapsed.ToString())"
 ```
 
-##Get Windows Processes
+## Get Windows Processes
 ```
 (Get-Process).Id| ForEach-Object{
     $a = @{}
@@ -72,5 +72,5 @@ write-host "Total Elapsed Time: $($ElapsedTime.Elapsed.ToString())"
 }
  ```
 
- ## This also can be done like the Unix "Top" command
+## This also can be done like the Unix "Top" command
 While(1) {ps | sort -des cpu | select -f 15 | ft -a; sleep 1; cls}
