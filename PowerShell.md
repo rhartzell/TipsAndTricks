@@ -9,8 +9,11 @@ Unix/Linux has the very handy GREP function and the piping ability allows you to
 the Select-String command can be abbreviated as sls
 
 ## Find a string in a file or files
+```
 select-string "unable to to get chat status" -Path web.qa-*.log
-Use regular expressions to find in a file or files.
+```
+
+## Use regular expressions to find in a file or files.
 The following code will find email addresses in a file.
 ```
 select-string -path *.txt20151201 -pattern "\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b”
@@ -73,4 +76,6 @@ write-host "Total Elapsed Time: $($ElapsedTime.Elapsed.ToString())"
  ```
 
 ## This also can be done like the Unix "Top" command
+```
 While(1) {ps | sort -des cpu | select -f 15 | ft -a; sleep 1; cls}
+```
