@@ -1,4 +1,4 @@
-# TipsAndTricks
+# Tips And Tricks
 
 
 ## Synopsis
@@ -7,4 +7,4 @@ Life is full of gotchas, even more so in technology.  This is a repo of various 
 
 [Elastic Search](https://github.com/rhartzell/TipsAndTricks/blob/master/ElasticSearch.md)
 
-[PowerShell Tips and Tricks](https://github.com/rhartzell/TipsAndTricks/blob/master/PowerShell.md)
+[Power Shell](https://github.com/rhartzell/TipsAndTricks/blob/master/PowerShell.md)
