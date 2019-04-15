@@ -11,7 +11,9 @@ ssh ec2-user@172-31-93-10 -i MyUSEast1KP.pem
 [root@ip-172-31-93-10 ec2-user]$ cd /var/www/html
 ## Create an index.html file
 [root@ip-172-31-93-10 html]$ nano index.html
+
 [root@ip-172-31-93-10 html]$ ls
+
 index.html
 ## Start Apache
 [root@ip-172-31-93-10 html]$ service httpd start
