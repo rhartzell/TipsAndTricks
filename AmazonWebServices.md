@@ -3,7 +3,7 @@
 ssh ec2-user@172-31-93-10 -i MyUSEast1KP.pem 
 ## Superuser mode
 [root@ip-172-31-93-10 ec2-user]$ sudo su
-##Update OS
+## Update OS
 [root@ip-172-31-93-10 ec2-user]$ yum update -y  
 ## Install Apache                                                                                                           
 [root@ip-172-31-93-10 ec2-user]$ yum install httpd -y
@@ -18,4 +18,3 @@ index.html
 Redirecting to /bin/systemctl start httpd.service
 ## Set flag to turn on Apache on startup
 [root@ip-172-31-93-10 html]$ chkconfig on
-
