@@ -15,6 +15,7 @@ ssh ec2-user@172-31-93-10 -i MyUSEast1KP.pem
 index.html
 ## Start Apache
 [root@ip-172-31-93-10 html]$ service httpd start
+
 Redirecting to /bin/systemctl start httpd.service
 ## Set flag to turn on Apache on startup
 [root@ip-172-31-93-10 html]$ chkconfig on
