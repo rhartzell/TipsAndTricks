@@ -1,5 +1,7 @@
 # Acronyms
 [Amazon Acronyms](https://geekflare.com/aws-related-acronyms/)
+[AWS Cheat Sheets](http://jayendrapatil.com/aws-certification-exam-cheat-sheet/)
+
 
 # EC2 Instance - Amazon Linux 2 AMI (HVM), SSD Volume Type (t2.micro)
 ## Use private key to SSH to server
