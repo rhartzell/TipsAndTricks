@@ -1,5 +1,5 @@
 # Acronyms
-[https://geekflare.com/aws-related-acronyms/](Amazon Acronyms)
+[Amazon Acronyms](https://geekflare.com/aws-related-acronyms/)
 
 # EC2 Instance - Amazon Linux 2 AMI (HVM), SSD Volume Type (t2.micro)
 ## Use private key to SSH to server
