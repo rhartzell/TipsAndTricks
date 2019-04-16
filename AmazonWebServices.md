@@ -1,4 +1,7 @@
-# Amazon Linux 2 AMI (HVM), SSD Volume Type (t2.micro)
+# Acronyms
+[https://geekflare.com/aws-related-acronyms/](Amazon Acronyms)
+
+# EC2 Instance - Amazon Linux 2 AMI (HVM), SSD Volume Type (t2.micro)
 ## Use private key to SSH to server
 ssh ec2-user@172-31-93-10 -i MyUSEast1KP.pem 
 ## Superuser mode
