@@ -4,6 +4,7 @@
 ```
 DECLARE
   cursor myCursor is (select lastname, userid, age from user);
+BEGIN
    FOR myCursor_rec IN myCursor  LOOP
     ...
       dbms_output.put_line('last name: ' || myCursor_rec.lastname);
@@ -48,4 +49,5 @@ END;
                 AS has_demographic_data
         FROM psp_customer pc
        WHERE pc.cdbcustomerid = 10668;
-END;```
+END;
+```
