@@ -1,4 +1,18 @@
-`BEGIN
+# Oracle Sql Tips and Examples
+
+## Boilerplate cursor loop
+```
+DECLARE
+  cursor myCursor is (select lastname, userid, age from user);
+   FOR myCursor_rec IN myCursor  LOOP
+    ...
+      dbms_output.put_line('last name: ' || myCursor_rec.lastname);
+   END LOOP;
+END;
+```
+
+## Nested CASE statements
+```BEGIN
    OPEN :pResultSet FOR
       SELECT pc.cdbcustomerid,
              CASE
@@ -34,4 +48,4 @@
                 AS has_demographic_data
         FROM psp_customer pc
        WHERE pc.cdbcustomerid = 10668;
-END;`
+END;```
