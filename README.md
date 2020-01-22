@@ -11,4 +11,4 @@ Life is full of gotchas, even more so in technology.  This is a repo of various 
 
 [Power Shell](https://github.com/rhartzell/TipsAndTricks/blob/master/PowerShell.md)
 
-[Orqcle SQL](https://github.com/rhartzell/TipsAndTricks/blob/master/SqlOracle.md)
+[Oracle SQL](https://github.com/rhartzell/TipsAndTricks/blob/master/SqlOracleTips.md)
