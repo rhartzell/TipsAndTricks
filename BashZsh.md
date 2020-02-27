@@ -3,7 +3,6 @@
 ## prettify directory structure
 ```
 ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//──/g' -e 's/─/├/' -e '$s/├/└/'
-```
 ├─zsh_demo
 ├───calculations
 ├─────africa
@@ -25,5 +24,5 @@ ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//──/g' -e 's/─/├/'
 ├─────europe
 ├───────malta
 └───────poland
-
+```
 
