@@ -29,4 +29,7 @@ Redirecting to /bin/systemctl start httpd.service
 
 ## Move files to a T2 Linux AMI EC2 instance
 `scp -i MyUSEast1KP.pem ~/Projects/BozRod/favicon.ico ec2-user@ec2-18-209-225-167.compute-1.amazonaws.com:~/`
-Using secure copy (scp). You can only copy them to the default root folder of the instance, then login and use `mv * /var/www/html` to get files moved to the web root.
+Using secure copy (scp). You can only copy them to the default root folder of the instance, then login and use `mv * /var/www/html` to get files moved to the web root. If you try to write directly to the web root you will get a "permission denied" error.
+
+## Move files from an Amazon EC2 instance to a local folder
+`scp -i MyUSEast1KP.pem -r ec2-user@ec2-18-209-225-167.compute-1.amazonaws.com:/var/www/html bozrod`
