@@ -11,6 +11,17 @@ BEGIN
 
 END;
 ```
+## SQL Query with a running total column
+```
+SELECT usercount, 
+       yearcreated, 
+       Sum(usercount) OVER (ORDER BY yearcreated) AS total 
+FROM  (SELECT Count(*) usercount, 
+       Extract(year FROM createdate) yearcreated 
+       FROM   ora_aspnet_membership 
+       GROUP  BY Extract(year FROM createdate) 
+       ORDER  BY Extract(year FROM createdate));
+```
 
 ## Nested CASE statements
 ```
