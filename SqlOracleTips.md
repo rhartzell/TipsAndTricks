@@ -60,3 +60,32 @@ SELECT pc.cdbcustomerid,
   FROM psp_customer pc
  WHERE pc.cdbcustomerid = 10668;
 ```
+
+## Declared record and table types, dynamic sql, and iteration of immediate execution
+```
+declare
+  type r is record (
+   cust_id       number
+   , org_name    varchar2(255)
+   , create_date varchar2(60)
+   , status_code varchar2(5)
+  );
+
+  TYPE T IS TABLE OF R;
+  MYROWS T; -- plural because it's a table not a record variable
+
+  v_sql       varchar2(32767);
+begin
+    v_sql := LinkQuery('select cust_id, org_name, create_date, status_code from cust@CDB where cust_id not in (select cdbcustomerid from psp_customer) order by create_date desc');
+    dbms_output.put_line(v_sql);
+    EXECUTE IMMEDIATE v_sql BULK COLLECT INTO MYROWS;
+    DBMS_OUTPUT.PUT_LINE(' number of records =' || MYROWS.count());
+    DBMS_OUTPUT.PUT_LINE('=========================');
+    
+    for i in 1..MYROWS.count 
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('cust_id: ' || MYROWS(i).cust_id || ' create_date: ' || MYROWS(i).create_date || ' status_code: ' || MYROWS(i).status_code || ' org_name: ' || MYROWS(i).org_name);
+    END LOOP;
+    
+end;
+```
