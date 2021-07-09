@@ -79,3 +79,8 @@ write-host "Total Elapsed Time: $($ElapsedTime.Elapsed.ToString())"
 ```
 While(1) {ps | sort -des cpu | select -f 15 | ft -a; sleep 1; cls}
 ```
+
+## Count Files in a directory
+```
+Get-ChildItem -Recurse -File | Measure-Object | %{$_.Count}
+```
