@@ -84,3 +84,10 @@ While(1) {ps | sort -des cpu | select -f 15 | ft -a; sleep 1; cls}
 ```
 Get-ChildItem -Recurse -File | Measure-Object | %{$_.Count}
 ```
+## Remove all GIT branches except master
+```
+git branch |`
+  %{ $_.Trim() } |`
+  ?{ $_ -ne 'master' -and $_ -ne '* master' } |`
+  %{ git branch -D $_ }
+```
