@@ -89,3 +89,43 @@ begin
     
 end;
 ```
+## Inserting records from multi data sources
+```
+               INSERT INTO AUDIT_TRANSACTION (ID,
+                                              AUDIT_ID,
+                                              CUSTOMER_ID,
+                                              AUTH_CODE,
+                                              AUDIT_STATUS,
+                                              AUDIT_STATUS_DESC,
+                                              created_by,
+                                              created_date)
+                  (SELECT ID,
+                          AUDIT_ID,
+                          CUSTOMER_ID,
+                          AUTH_CODE,
+                          AUDIT_STATUS,
+                          AUDIT_STATUS_DESC,
+                          CREATED_BY,
+                          CREATED_DATE
+                     FROM (SELECT SYS_GUID () ID FROM DUAL),
+                          (SELECT vAuditId AUDIT_ID FROM DUAL),
+                          (SELECT cursor_customer.motor_carrier_id
+                                     CUSTOMER_ID
+                             FROM DUAL),
+                          (SELECT auth_code AS auth_code
+                             FROM (  SELECT auth_code
+                                       FROM driver_record_transaction
+                                      WHERE     TRUNC (request_date) >=
+                                                   TRUNC (
+                                                      pAuditPeriodStartDate)
+                                            AND TRUNC (request_date) <=
+                                                   TRUNC (pAuditPeriodEndDate)
+                                            AND motor_carrier_id =
+                                                   cursor_customer.motor_carrier_id
+                                   ORDER BY DBMS_RANDOM.VALUE)
+                            WHERE ROWNUM <= pMaxTransPerCust),
+                          (SELECT 1 AUDIT_STATUS FROM DUAL),
+                          (SELECT 'Open' AUDIT_STATUS_DESC FROM DUAL),
+                          (SELECT pCreatedBy CREATED_BY FROM DUAL),
+                          (SELECT SYSDATE CREATED_DATE FROM DUAL));
+```
