@@ -89,43 +89,55 @@ begin
     
 end;
 ```
-## Inserting records from multi data sources
+## Inserting records from multiple sources
 ```
-               INSERT INTO AUDIT_TRANSACTION (ID,
-                                              AUDIT_ID,
-                                              CUSTOMER_ID,
-                                              AUTH_CODE,
-                                              AUDIT_STATUS,
-                                              AUDIT_STATUS_DESC,
-                                              created_by,
-                                              created_date)
-                  (SELECT ID,
+-- simple example
+INSERT INTO security_answer (userid, question_id, answer_hash, created_date)
+  (SELECT userid,
+          question_id,
+          answer_hash,
+          CREATED_DATE
+     FROM (SELECT 'D91CA898D8937C7CE0530AAE1EAC2A80' USERID FROM DUAL),
+          (select question_id, answer_hash from security_answer where userid='CF4C6242C1EB7AB7E0530BAE1FACAC58'),
+          (SELECT sysdate created_date FROM DUAL));
+
+-- complicated example
+INSERT INTO AUDIT_TRANSACTION (ID,
                           AUDIT_ID,
                           CUSTOMER_ID,
                           AUTH_CODE,
                           AUDIT_STATUS,
                           AUDIT_STATUS_DESC,
-                          CREATED_BY,
-                          CREATED_DATE
-                     FROM (SELECT SYS_GUID () ID FROM DUAL),
-                          (SELECT vAuditId AUDIT_ID FROM DUAL),
-                          (SELECT cursor_customer.motor_carrier_id
-                                     CUSTOMER_ID
-                             FROM DUAL),
-                          (SELECT auth_code AS auth_code
-                             FROM (  SELECT auth_code
-                                       FROM driver_record_transaction
-                                      WHERE     TRUNC (request_date) >=
-                                                   TRUNC (
-                                                      pAuditPeriodStartDate)
-                                            AND TRUNC (request_date) <=
-                                                   TRUNC (pAuditPeriodEndDate)
-                                            AND motor_carrier_id =
-                                                   cursor_customer.motor_carrier_id
-                                   ORDER BY DBMS_RANDOM.VALUE)
-                            WHERE ROWNUM <= pMaxTransPerCust),
-                          (SELECT 1 AUDIT_STATUS FROM DUAL),
-                          (SELECT 'Open' AUDIT_STATUS_DESC FROM DUAL),
-                          (SELECT pCreatedBy CREATED_BY FROM DUAL),
-                          (SELECT SYSDATE CREATED_DATE FROM DUAL));
+                          created_by,
+                          created_date)
+(SELECT ID,
+      AUDIT_ID,
+      CUSTOMER_ID,
+      AUTH_CODE,
+      AUDIT_STATUS,
+      AUDIT_STATUS_DESC,
+      CREATED_BY,
+      CREATED_DATE
+ FROM (SELECT SYS_GUID () ID FROM DUAL),
+      (SELECT vAuditId AUDIT_ID FROM DUAL),
+      (SELECT cursor_customer.motor_carrier_id
+                 CUSTOMER_ID
+         FROM DUAL),
+      (SELECT auth_code AS auth_code
+         FROM (  SELECT auth_code
+                   FROM driver_record_transaction
+                  WHERE     TRUNC (request_date) >=
+                               TRUNC (
+                                  pAuditPeriodStartDate)
+                        AND TRUNC (request_date) <=
+                               TRUNC (pAuditPeriodEndDate)
+                        AND motor_carrier_id =
+                               cursor_customer.motor_carrier_id
+               ORDER BY DBMS_RANDOM.VALUE)
+        WHERE ROWNUM <= pMaxTransPerCust),
+      (SELECT 1 AUDIT_STATUS FROM DUAL),
+      (SELECT 'Open' AUDIT_STATUS_DESC FROM DUAL),
+      (SELECT pCreatedBy CREATED_BY FROM DUAL),
+      (SELECT SYSDATE CREATED_DATE FROM DUAL));
+
 ```
