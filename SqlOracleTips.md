@@ -139,5 +139,17 @@ INSERT INTO AUDIT_TRANSACTION (ID,
       (SELECT 'Open' AUDIT_STATUS_DESC FROM DUAL),
       (SELECT pCreatedBy CREATED_BY FROM DUAL),
       (SELECT SYSDATE CREATED_DATE FROM DUAL));
+      
+-- Another hybrid example:
+Insert into PROBATION_TRANSACTION (ID,CUSTOMER_ID,AUTH_CODE,PROBATION_STATUS,PROBATION_STATUS_DESC,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE) 
+(select ID,CUSTOMER_ID,AUTH_CODE,PROBATION_STATUS,PROBATION_STATUS_DESC,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE
+from (select sys_guid() ID from dual ),
+     (select motor_carrier_id as customer_id, auth_code from driver_record_transaction where motor_carrier_id='10806' and request_date > trunc(sysdate-3)),
+     (select 1 probation_status from dual),
+     (select 'Open' probation_status_desc from dual),
+     (select 'llllllll@rrrr.com' created_by from dual),
+     (select sysdate created_date from dual),
+     (select 'dweddle@mailinator.com' updated_by from dual),
+     (select sysdate updated_date from dual));
 
 ```
