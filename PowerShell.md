@@ -3,6 +3,11 @@
 Some very handy powershell scripts to get the job done
 A collection of scripts and commands to troubleshoot issues very quickly.
 
+## Curl equivalent in power shell
+```
+$custLogins = invoke-webrequest http://localhost:8000/MyService/api/v1/cust/2009/getCustomerLogins
+```
+
 ## Grep Logs 
 Unix/Linux has the very handy GREP function and the piping ability allows you to crunch through thousands of logs very very quickly.  As it turns out PowerShell has the very same power.  Some might even argue MORE power.
 
