@@ -18,14 +18,14 @@ SELECT usercount,
        Sum(usercount) OVER (ORDER BY yearcreated) AS total 
 FROM  (SELECT Count(*) usercount, 
        Extract(year FROM createdate) yearcreated 
-       FROM   ora_aspnet_membership 
+       FROM   user_table 
        GROUP  BY Extract(year FROM createdate) 
        ORDER  BY Extract(year FROM createdate));
 ```
 
 ## Nested CASE statements
 ```
-SELECT pc.cdbcustomerid,
+SELECT pc.customerid,
        CASE
           WHEN (pc.typeid = 1 OR pc.typeid = 2)
           THEN
@@ -57,7 +57,7 @@ SELECT pc.cdbcustomerid,
               END)
        END
           AS has_demographic_data
-  FROM psp_customer pc
+  FROM customer_table pc
  WHERE pc.cdbcustomerid = 10668;
 ```
 
@@ -76,7 +76,7 @@ declare
 
   v_sql       varchar2(32767);
 begin
-    v_sql := LinkQuery('select cust_id, org_name, create_date, status_code from cust@CDB where cust_id not in (select cdbcustomerid from psp_customer) order by create_date desc');
+    v_sql := LinkQuery('select cust_id, org_name, create_date, status_code from cust@CDB where cust_id not in (select customerId from customer_table) order by create_date desc');
     dbms_output.put_line(v_sql);
     EXECUTE IMMEDIATE v_sql BULK COLLECT INTO MYROWS;
     DBMS_OUTPUT.PUT_LINE(' number of records =' || MYROWS.count());
