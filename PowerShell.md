@@ -19,6 +19,10 @@ $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0
 $getProjectUri = "yourUri"
 Invoke-RestMethod -Method Get -Uri $getProjectUri -Headers @{Authorization = "Basic $base64AuthInfo" } -Credential $credential -ContentType "application/json"
 ```
+## Tailing log files
+```
+get-content PspSchedulingService-20230126.log -wait
+```
 ## Grep Logs 
 Unix/Linux has the very handy GREP function and the piping ability allows you to crunch through thousands of logs very very quickly.  As it turns out PowerShell has the very same power.  Some might even argue MORE power.
 
