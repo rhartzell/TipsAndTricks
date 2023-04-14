@@ -11,6 +11,15 @@ BEGIN
 
 END;
 ```
+
+## Fetch number of rows from TOP
+```
+select id from driver_profile fetch first 1 row only;
+select id from driver_profile fetch first 10 row only;
+select id from driver_profile fetch first 10 rows only;
+-- row or rows works with plural
+```
+
 ## SQL Query with a running total column
 ```
 SELECT usercount, 
